@@ -26,6 +26,7 @@ function toggle(param) {
 function buscarUsuario(nombre) {
   $.ajax({
     type: "post",
+    async: true,
     url: ruta_buscador_usuario,
     data: {
       usuario: nombre,
@@ -44,8 +45,10 @@ function buscarUsuario(nombre) {
     },
   });
 }
+
 function buscarProducto(nombre) {
   $.ajax({
+    async: true,
     type: "post",
     url: ruta_buscador_producto,
     data: {
@@ -55,20 +58,24 @@ function buscarProducto(nombre) {
     success: function (response) {
       $(".container_productos").empty();
       response.forEach((element) => {
-        $(".container_productos").append(`<div>
-				<img src="${element.imagen}" alt="foto">
-				<div>${element.nombre}</div>
-				<button class="eliminar-product" data-id="${element.id}">Eliminar</button>
-			</div>`);
+        $(".container_productos").append(`
+          <div>
+              <img src="${element.imagen}" alt="foto" class="product-image">
+              <div>${element.nombre}</div>
+              <button class="eliminar-product" data-id="${element.id}">Eliminar</button>
+          </div>
+        `);
       });
     },
   });
 }
+
 $(document).on("click", ".eliminar-product", function () {
   let id = $(this).data("id");
   $(this).parent().remove();
   $.ajax({
     type: "post",
+    async: true,
     url: ruta_eliminar_productos,
     data: {
       id: id,
@@ -97,6 +104,7 @@ $(document).on("click", ".eliminar-user", function () {
 
 $("#buscador-producto").keyup(function (e) {
   var nombre = $(this).val();
+  console.log('Cualquier cosa');
   buscarProducto(nombre);
 });
 

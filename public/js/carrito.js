@@ -102,3 +102,27 @@ $(document).on("click", ".eliminar-producto-carrito", function() {
   });
 });
 
+$(document).ready(function() {
+  $('#vaciar-carrito').on('click', function() {
+    if (confirm('¿Estás seguro de que quieres vaciar tu carrito?')) {
+      $.ajax({
+        url: ruta_borrar_sesion_carrito,
+        type: 'POST',
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+          if (response.success) {
+            // Recargar la página para reflejar el carrito vacío
+            location.reload();
+          } else {
+            alert('Hubo un problema al vaciar el carrito.');
+          }
+        },
+        error: function(error) {
+          console.error('Error:', error);
+        }
+      });
+    }
+  });
+});

@@ -1,6 +1,0 @@
-<!-- templates/comentarios.html.twig -->
-{% if is_granted('ROLE_USER') %}
-    <!-- Formulario de comentarios -->
-{% else %}
-    <p><a href="{{ path('login') }}">Inicia sesión</a> para comentar.</p>
-{% endif %}

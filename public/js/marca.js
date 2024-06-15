@@ -48,13 +48,13 @@ function mostrarMarcas(marca, productos) {
         // Añadir el botón correspondiente dependiendo del stock
         if (element.stock > 0) {
             productCard += `
-        <button class="btn btn-primary add-to-cart" data-id="${element.id}" data-nombre="${element.nombre}" data-precio="${element.precio}">
+        <button class="btn btn-primary add-to-cart" data-id="${element.id}" data-nombre="${element.nombre}" data-precio="${element.precio}" data-imagen="${element.imagen}">
             Añadir al carrito
         </button>
         `;
         } else {
             productCard += `
-        <button class="btn btn-primary notify-me" data-id="${element.id}" data-nombre="${element.nombre}" data-email="${element.email}">
+        <button class="btn btn-primary notify-me" data-id="${element.id}" data-nombre="${element.nombre}" data-email="${element.email}" data-imagen="${element.imagen}">
             Notificarme cuando haya stock
         </button>
         `;

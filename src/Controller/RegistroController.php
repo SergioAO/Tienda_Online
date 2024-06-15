@@ -152,11 +152,17 @@ class RegistroController extends AbstractController
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('app_email_verificado');
         } catch (VerifyEmailExceptionInterface $e) {
             $this->addFlash('verify_email_error', $e->getReason());
 
             return $this->redirectToRoute('app_register');
         }
+    }
+
+    #[Route('/email_verificado', name: 'app_email_verificado')]
+    public function emailVerificado(Request $request): Response
+    {
+        return $this->render('registro/email_verificado.html.twig');
     }
 }

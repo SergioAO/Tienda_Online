@@ -1,0 +1,22 @@
+{# templates/registro/email_verificado.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Email Verificado{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h1 class="display-4 text-success">¡Enhorabuena!</h1>
+                        <p class="lead mt-3">Tu dirección de correo electrónico ha sido verificada con éxito.</p>
+                        <p>Ahora puedes disfrutar de todos los beneficios y características de nuestra plataforma.</p>
+                        <a href="{{ path('home') }}" class="btn btn-primary mt-4">Volver a la Página Principal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

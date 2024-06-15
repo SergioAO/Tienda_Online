@@ -24,9 +24,6 @@ class Pregunta
     #[ORM\JoinColumn(nullable: false)]
     private ?Usuario $usuario = null;
 
-    #[ORM\OneToMany(mappedBy: 'pregunta', targetEntity: Respuesta::class, orphanRemoval: true)]
-    private Collection $respuestas;
-
     #[ORM\ManyToOne(inversedBy: 'preguntas')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Producto $producto = null;
@@ -66,34 +63,6 @@ class Pregunta
     public function setUsuario(?Usuario $usuario): self
     {
         $this->usuario = $usuario;
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Respuesta>
-     */
-    public function getRespuestas(): Collection
-    {
-        return $this->respuestas;
-    }
-
-    public function addRespuesta(Respuesta $respuesta): self
-    {
-        if (!$this->respuestas->contains($respuesta)) {
-            $this->respuestas->add($respuesta);
-            $respuesta->setPregunta($this);
-        }
-        return $this;
-    }
-
-    public function removeRespuesta(Respuesta $respuesta): self
-    {
-        if ($this->respuestas->contains($respuesta)) {
-            $this->respuestas->removeElement($respuesta);
-            if ($respuesta->getPregunta() === $this) {
-                $respuesta->setPregunta(null);
-            }
-        }
         return $this;
     }
 

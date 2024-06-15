@@ -210,3 +210,9 @@ body {
 .product-card button.notify-me:hover {
     background-color: #0056b3; /* Un azul más oscuro para el hover */
 }
+
+.product-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover; /* Asegura que la imagen se ajuste bien al contenedor */
+}

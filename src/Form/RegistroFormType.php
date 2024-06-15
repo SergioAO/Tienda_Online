@@ -47,11 +47,10 @@ class RegistroFormType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '20000',
+                        'maxSize' => '200000',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',
-                            'image/jpg',
                             'image/jpg',
                         ], 'mimeTypesMessage' => 'Por favor sube una imagen válida',
                     ])

@@ -413,21 +413,13 @@ class HomeController extends AbstractController
         ]);
     }
 
-    private function buscarProducto($parametro)
-    {
-        return $this->repo_producto->createQueryBuilder('p')
-            ->andWhere("LOWER(p.nombre) LIKE '%" . $parametro . "%'")
-            ->orWhere("LOWER(p.categoria) LIKE '%" . $parametro . "%'")
-            ->orWhere("LOWER(p.marca) LIKE '%" . $parametro . "%'")
-            ->getQuery()->getResult();
-    }
+
     private function buscarUsuario($parametro)
     {
         return $this->repo_usuario->createQueryBuilder('u')
             ->andWhere("LOWER(u.email) LIKE '%" . $parametro . "%'")
             ->getQuery()->getResult();
     }
-
 
     #[Route('/buscarProducto', name: 'buscarProducto', methods: ['POST'])]
     public function buscarProductos(Request $request): Response
@@ -459,6 +451,14 @@ class HomeController extends AbstractController
         return new JsonResponse($jsonContent, Response::HTTP_OK, [], true);
     }
 
+    private function buscarProducto($parametro)
+    {
+        return $this->repo_producto->createQueryBuilder('p')
+            ->andWhere("LOWER(p.nombre) LIKE '" . $parametro . "%'")
+            ->orWhere("LOWER(p.categoria) LIKE '" . $parametro . "%'")
+            ->orWhere("LOWER(p.marca) LIKE '" . $parametro . "%'")
+            ->getQuery()->getResult();
+    }
 
     #[Route('/buscarUsuario', name: 'buscarUsuario', methods: ['POST'])]
     public function buscarUsuarios(Request $request): Response
@@ -751,5 +751,15 @@ class HomeController extends AbstractController
             'compras' => $comprasArray,
             'pedido' => $pedido,
         ]);
+    }
+
+    #[Route('/carrito/vaciar', name: 'vaciar_carrito', methods: ['POST'])]
+    public function vaciarCarrito(SessionInterface $session): JsonResponse
+    {
+        // Elimina el carrito de la sesión
+        $session->remove('carrito');
+
+        // Devuelve una respuesta JSON para indicar que la operación fue exitosa
+        return new JsonResponse(['success' => true]);
     }
 }

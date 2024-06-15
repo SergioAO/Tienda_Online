@@ -26,9 +26,6 @@ class Compra
     #[ORM\Column(type: 'string', length: 50, nullable: true)]
     private ?string $precio_compra = null;
 
-    #[ORM\OneToOne(mappedBy: 'idCompra', cascade: ['persist', 'remove'])]
-    private ?Comentarios $comentarios = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -78,17 +75,4 @@ class Compra
         return $this;
     }
 
-    public function getComentarios(): ?Comentarios
-    {
-        return $this->comentarios;
-    }
-
-    public function setComentarios(?Comentarios $comentarios): self
-    {
-        if($comentarios->getIdCompra() !== $this) {
-            $comentarios->setIdCompra($this);
-        }
-        $this->comentarios = $comentarios;
-        return $this;
-    }
 }

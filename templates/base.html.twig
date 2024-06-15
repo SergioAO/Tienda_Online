@@ -1,179 +1,178 @@
 <!DOCTYPE html>
 <html lang="es">
-	<head>
-		<meta charset="UTF-8">
-		<title>
-			{% block title %}Electro-Gamer
-			{% endblock %}
-		</title>
-		<link rel="stylesheet" href="{{ asset('build/vendors-node_modules_bootstrap-icons_font_bootstrap-icons_css-node_modules_bootstrap_dist_css-b08609.css') }}">
-		<link rel="stylesheet" href="{{ asset('build/app.css') }}">
-		<link rel="stylesheet" href="{{ asset('build/styles.css') }}">
-		<link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
-		<link rel="stylesheet" href="{{ asset('css/carrito.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-		<script language="javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-		<script>
-			const ruta_categorias = "{{ path('categorias') }}"
-            const ruta_marcas = "{{ path('marcas') }}"
-            const ruta_carrito = "{{ path('carrito') }}"
-            const ruta_carrito_agregar = "{{ path('carrito_agregar') }}"
-            const ruta_carrito_eliminar = "{{ path('carrito_eliminar') }}"
-            const ruta_producto_mark = "{{ path('productos_marca', {'marca': '_'}) }}"
-            const ruta_producto_category = "{{ path('productos_categoria', {'categoria': '_'}) }}"
-            const ruta_notificacion = "{{ path('notificar_stock') }}"
-		</script>
-		<script src="{{asset("js/base.js")}}" defer></script>
-		<script src="{{asset("js/carrito.js")}}" defer></script>
-        <script src="{{asset("js/funciones.js")}}" defer></script>
-        <script src="{{asset("js/geolocalizacion.js")}}" defer></script>
-        <script src="{{asset("js/notificacion.js")}}" defer></script>
-{#        <script src="{{asset("js/validaRegistro.js")}}" defer></script>#}
-		{% block head %}{% endblock %}
-
-	</head>
-	<body class="bg-light text-dark">
-		<header class="fixed-top">
-			{% block header %}
-				{% include 'componentes/cabecera.html.twig' %}
-			{% endblock %}
-		</header>
-		<div id="miCategoria" class="sidebar sidebar-izq bg-light text-dark">
-            <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar('miCategoria')">×</a>
-            <h3>Categorias</h3>
-            <ul class="categorias"></ul>
-            <h3>Marcas</h3>
-            <ul class="marcas"></ul>
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}Electro-Gamer{% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{ asset('build/vendors-node_modules_bootstrap-icons_font_bootstrap-icons_css-node_modules_bootstrap_dist_css-b08609.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/carrito.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <script language="javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script>
+        const ruta_categorias = "{{ path('categorias') }}"
+        const ruta_marcas = "{{ path('marcas') }}"
+        const ruta_carrito = "{{ path('carrito') }}"
+        const ruta_carrito_agregar = "{{ path('carrito_agregar') }}"
+        const ruta_carrito_eliminar = "{{ path('carrito_eliminar') }}"
+        const ruta_producto_mark = "{{ path('productos_marca', {'marca': '_'}) }}"
+        const ruta_producto_category = "{{ path('productos_categoria', {'categoria': '_'}) }}"
+        const ruta_notificacion = "{{ path('notificar_stock') }}"
+    </script>
+    <script src="{{asset('js/base.js')}}" defer></script>
+    <script src="{{asset('js/carrito.js')}}" defer></script>
+    <script src="{{asset('js/funciones.js')}}" defer></script>
+    <script src="{{asset('js/geolocalizacion.js')}}" defer></script>
+    <script src="{{asset('js/notificacion.js')}}" defer></script>
+    {# <script src="{{asset('js/validaRegistro.js')}}" defer></script> #}
+    {% block head %}{% endblock %}
+</head>
+<body class="bg-light text-dark">
+    <header class="fixed-top">
+        {% block header %}
+            {% include 'componentes/cabecera.html.twig' %}
+        {% endblock %}
+    </header>
+    <div id="miCategoria" class="sidebar sidebar-izq bg-light text-dark">
+        <a href="javascript:void(0)" class="closebtn">×</a>
+        <h3>Categorias</h3>
+        <ul class="categorias"></ul>
+        <h3>Marcas</h3>
+        <ul class="marcas"></ul>
+    </div>
+    <div id="miCarrito" class="sidebar bg-light text-dark">
+        <a href="javascript:void(0)" class="closebtn">×</a>
+        <h3>Mi carrito</h3>
+        <ul class="carrito-compra"></ul>
+        <div class="carrito-total"></div>
+        <div class="carrito-footer">
+            <button onclick="location.href='{{ path('ver_carrito') }}'">Ver artículos en tu carrito</button>
         </div>
-        <div id="miCarrito" class="sidebar bg-light text-dark">
-            <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar('miCarrito')">×</a>
-            <h3>Mi carrito</h3>
-            <ul class="carrito-compra"></ul>
-            <div class="carrito-total"></div>
-            <div class="carrito-footer">
-                <button onclick="location.href='{{ path('ver_carrito') }}'">Ver artículos en tu carrito</button>
+    </div>
+    <main role="main" class="container" style="margin-top: 80px;">
+        {% block body %}{% endblock %}
+        <br>
+        <br>
+    </main>
+    <footer class="bg-light text-dark py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Sección: Por qué comprar -->
+                <div class="col-12 col-md-2 mb-4">
+                    <h5 class="fw-bold">Por qué comprar</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ path('como_comprar') }}" class="text-muted">Cómo comprar</a></li>
+                        <li><a href="{{ path('formas_de_pago') }}" class="text-muted">Formas de pago</a></li>
+                        <li><a href="#" class="text-muted">Gastos de envío</a></li>
+                        <li><a href="#" class="text-muted">Cupones descuento</a></li>
+                        <li><a href="#" class="text-muted">Preguntas frecuentes</a></li>
+                        <li><a href="#" class="text-muted">Opiniones de clientes</a></li>
+                        <li><a href="#" class="text-muted">Tarjetas regalo</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sección: Quiénes somos -->
+                <div class="col-12 col-md-2 mb-4">
+                    <h5 class="fw-bold">Quiénes somos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted">Quiénes somos</a></li>
+                        <li><a href="#" class="text-muted">Compromisos</a></li>
+                        <li><a href="#" class="text-muted">Nuestras tiendas</a></li>
+                        <li><a href="#" class="text-muted">Nuestras Marcas</a></li>
+                        <li><a href="#" class="text-muted">Condiciones de compra</a></li>
+                        <li><a href="#" class="text-muted">Afiliados</a></li>
+                        <li><a href="#" class="text-muted">Aviso legal</a></li>
+                        <li><a href="#" class="text-muted">Privacidad</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sección: Contactar -->
+                <div class="col-12 col-md-2 mb-4">
+                    <h5 class="fw-bold">Contactar</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted">Contacto y Ayuda</a></li>
+                        <li><a href="#" class="text-muted">Devoluciones y Garantías</a></li>
+                        <li><a href="#" class="text-muted">Wiki PcComponentes</a></li>
+                        <li><a href="#" class="text-muted">Opina y Gana</a></li>
+                        <li><a href="#" class="text-muted">Publicidad</a></li>
+                        <li><a href="#" class="text-muted">Trabaja con nosotros</a></li>
+                        <li><a href="#" class="text-muted">Canal ético</a></li>
+                        <li><a href="#" class="text-muted">Política de cookies</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sección: Otros -->
+                <div class="col-12 col-md-2 mb-4">
+                    <h5 class="fw-bold">Otros</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted">Replay</a></li>
+                        <li><a href="#" class="text-muted">Black Friday</a></li>
+                        <li><a href="#" class="text-muted">Cyber Monday</a></li>
+                        <li><a href="#" class="text-muted">PcDays</a></li>
+                        <li><a href="#" class="text-muted">Marketplace</a></li>
+                        <li><a href="#" class="text-muted">Servicio logístico Fulfillment</a></li>
+                        <li><a href="#" class="text-muted">Servicio de reparaciones</a></li>
+                        <li><a href="#" class="text-muted">Concursos</a></li>
+                        <li><a href="#" class="text-muted">Cita asistencia técnica</a></li>
+                        <li><a href="#" class="text-muted">Responsabilidad Social</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sección: Comunidad -->
+                <div class="col-12 col-md-2 mb-4">
+                    <h5 class="fw-bold">Comunidad</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted">Blog</a></li>
+                        <li><a href="#" class="text-muted">Instagram</a></li>
+                        <li><a href="#" class="text-muted">Twitter</a></li>
+                        <li><a href="#" class="text-muted">Facebook</a></li>
+                        <li><a href="#" class="text-muted">Telegram</a></li>
+                        <li><a href="#" class="text-muted">YouTube</a></li>
+                        <li><a href="#" class="text-muted">TikTok</a></li>
+                        <li><a href="#" class="text-muted">Twitch</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Sección: País y premios -->
+                <div class="col-12 col-md-4 mb-4">
+                    <h5 class="fw-bold">Electro Gamer en</h5>
+                    <select class="form-select mb-3">
+                        <option value="es">España</option>
+                        <!-- Añadir más opciones según sea necesario -->
+                    </select>
+                    <div class="d-flex align-items-center">
+                        <img src="ruta/a/eawards.png" alt="eAwards" class="me-2" style="height: 40px;">
+                        <img src="ruta/a/e-commerce-awards.png" alt="E-commerce Awards" style="height: 40px;">
+                    </div>
+                </div>
+
+                <!-- Sección: Medios de pago -->
+                <div class="col-12 col-md-4 mb-4">
+                    <h5 class="fw-bold">Medios de pago aceptados</h5>
+                    <div class="d-flex">
+                        <img src="ruta/a/maestro.png" alt="Maestro" class="me-2" style="height: 30px;">
+                        <img src="ruta/a/mastercard.png" alt="Mastercard" class="me-2" style="height: 30px;">
+                        <img src="ruta/a/visa.png" alt="Visa" style="height: 30px;">
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="text-muted">
+                        Electro Gamer CIF XXXXXX. AVDA Europa, Parcela 24-45 y 26-66. Polígono industrial Las Rozas, 25840, Las Rozas, Madrid. ESPAÑA.
+                    </p>
+                </div>
             </div>
         </div>
-        <main role="main" class="container" style="margin-top: 80px;">
-            {% block body %}{% endblock %}
-			<br>
-			<br>
-        </main>
-            <footer class="bg-light text-dark py-5">
-                <div class="container">
-                    <div class="row">
-                        <!-- Sección: Por qué comprar -->
-                        <div class="col-12 col-md-2 mb-4">
-                            <h5 class="fw-bold">Por qué comprar</h5>
-                            <ul class="list-unstyled">
-                                <li><a href="{{ path('como_comprar') }}" class="text-muted">Cómo comprar</a></li>
-                                <li><a href="{{ path('formas_de_pago') }}" class="text-muted">Formas de pago</a></li>
-                                <li><a href="#" class="text-muted">Gastos de envío</a></li>
-                                <li><a href="#" class="text-muted">Cupones descuento</a></li>
-                                <li><a href="#" class="text-muted">Preguntas frecuentes</a></li>
-                                <li><a href="#" class="text-muted">Opiniones de clientes</a></li>
-                                <li><a href="#" class="text-muted">Tarjetas regalo</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Sección: Quiénes somos -->
-                        <div class="col-12 col-md-2 mb-4">
-                            <h5 class="fw-bold">Quiénes somos</h5>
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="text-muted">Quiénes somos</a></li>
-                                <li><a href="#" class="text-muted">Compromisos</a></li>
-                                <li><a href="#" class="text-muted">Nuestras tiendas</a></li>
-                                <li><a href="#" class="text-muted">Nuestras Marcas</a></li>
-                                <li><a href="#" class="text-muted">Condiciones de compra</a></li>
-                                <li><a href="#" class="text-muted">Afiliados</a></li>
-                                <li><a href="#" class="text-muted">Aviso legal</a></li>
-                                <li><a href="#" class="text-muted">Privacidad</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Sección: Contactar -->
-                        <div class="col-12 col-md-2 mb-4">
-                            <h5 class="fw-bold">Contactar</h5>
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="text-muted">Contacto y Ayuda</a></li>
-                                <li><a href="#" class="text-muted">Devoluciones y Garantías</a></li>
-                                <li><a href="#" class="text-muted">Wiki PcComponentes</a></li>
-                                <li><a href="#" class="text-muted">Opina y Gana</a></li>
-                                <li><a href="#" class="text-muted">Publicidad</a></li>
-                                <li><a href="#" class="text-muted">Trabaja con nosotros</a></li>
-                                <li><a href="#" class="text-muted">Canal ético</a></li>
-                                <li><a href="#" class="text-muted">Política de cookies</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Sección: Otros -->
-                        <div class="col-12 col-md-2 mb-4">
-                            <h5 class="fw-bold">Otros</h5>
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="text-muted">Replay</a></li>
-                                <li><a href="#" class="text-muted">Black Friday</a></li>
-                                <li><a href="#" class="text-muted">Cyber Monday</a></li>
-                                <li><a href="#" class="text-muted">PcDays</a></li>
-                                <li><a href="#" class="text-muted">Marketplace</a></li>
-                                <li><a href="#" class="text-muted">Servicio logístico Fulfillment</a></li>
-                                <li><a href="#" class="text-muted">Servicio de reparaciones</a></li>
-                                <li><a href="#" class="text-muted">Concursos</a></li>
-                                <li><a href="#" class="text-muted">Cita asistencia técnica</a></li>
-                                <li><a href="#" class="text-muted">Responsabilidad Social</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Sección: Comunidad -->
-                        <div class="col-12 col-md-2 mb-4">
-                            <h5 class="fw-bold">Comunidad</h5>
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="text-muted">Blog</a></li>
-                                <li><a href="#" class="text-muted">Instagram</a></li>
-                                <li><a href="#" class="text-muted">Twitter</a></li>
-                                <li><a href="#" class="text-muted">Facebook</a></li>
-                                <li><a href="#" class="text-muted">Telegram</a></li>
-                                <li><a href="#" class="text-muted">YouTube</a></li>
-                                <li><a href="#" class="text-muted">TikTok</a></li>
-                                <li><a href="#" class="text-muted">Twitch</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <hr class="my-4">
-
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <p class="text-muted">
-                                Electro Gamer CIF XXXXXX. AVDA Europa, Parcela 24-45 y 26-66. Polígono industrial Las Rozas, 25840, Las Rozas, Madrid. ESPAÑA.
-                            </p>
-                        </div>
-                    </div>
-
-                    {#            <div class="row">#}
-                    {#                <!-- Sección: País y premios -->#}
-                    {#                <div class="col-12 col-md-4 mb-4">#}
-                    {#                    <h5 class="fw-bold">PcComponentes en</h5>#}
-                    {#                    <select class="form-select mb-3">#}
-                    {#                        <option value="es">España</option>#}
-                    {#                        <!-- Añadir más opciones según sea necesario -->#}
-                    {#                    </select>#}
-                    {#                    <div class="d-flex align-items-center">#}
-                    {#                        <img src="ruta/a/eawards.png" alt="eAwards" class="me-2" style="height: 40px;">#}
-                    {#                        <img src="ruta/a/e-commerce-awards.png" alt="E-commerce Awards" style="height: 40px;">#}
-                    {#                    </div>#}
-                    {#                </div>#}
-
-                    {#                <!-- Sección: Medios de pago -->#}
-                    {#                <div class="col-12 col-md-4 mb-4">#}
-                    {#                    <h5 class="fw-bold">Medios de pago aceptados</h5>#}
-                    {#                    <div class="d-flex">#}
-                    {#                        <img src="ruta/a/maestro.png" alt="Maestro" class="me-2" style="height: 30px;">#}
-                    {#                        <img src="ruta/a/mastercard.png" alt="Mastercard" class="me-2" style="height: 30px;">#}
-                    {#                        <img src="ruta/a/visa.png" alt="Visa" style="height: 30px;">#}
-                    {#                    </div>#}
-                    {#                </div>#}
-                </div>
-                {% block footer %}{% endblock %}
-            </footer>
-		</body>
-	</html>
+        {% block footer %}{% endblock %}
+    </footer>
+    </body>
+</html>

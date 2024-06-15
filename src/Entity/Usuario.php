@@ -51,13 +51,12 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Pregunta::class, mappedBy: 'usuario', orphanRemoval: true)]
     private Collection $preguntas;
 
-    #[ORM\OneToMany(targetEntity: Respuesta::class, mappedBy: 'usuario', orphanRemoval: true)]
-    private Collection $respuestas;
-
     #[ORM\OneToMany(targetEntity: DatoDePago::class, mappedBy: 'usuario', orphanRemoval: true)]
     private Collection $datoDePago;
     #[ORM\OneToMany(targetEntity: NotificacionStock::class, mappedBy: 'usuario', orphanRemoval: true)]
     private Collection $notificacionesStock;
+    #[ORM\OneToMany(targetEntity: Interaccion::class, mappedBy: 'usuario')]
+    private Collection $interacciones;
 
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $isVerified = 0;
@@ -65,6 +64,7 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->notificacionesStock = new ArrayCollection();
+        $this->interacciones = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -232,34 +232,6 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Respuesta>
-     */
-    public function getRespuestas(): Collection
-    {
-        return $this->respuestas;
-    }
-
-    public function addRespuesta(Respuesta $respuesta): self
-    {
-        if (!$this->respuestas->contains($respuesta)) {
-            $this->respuestas->add($respuesta);
-            $respuesta->setUsuario($this);
-        }
-        return $this;
-    }
-
-    public function removeRespuesta(Respuesta $respuesta): self
-    {
-        if ($this->respuestas->contains($respuesta)) {
-            $this->respuestas->removeElement($respuesta);
-            if ($respuesta->getUsuario() === $this) {
-                $respuesta->setUsuario(null);
-            }
-        }
-        return $this;
-    }
-
-    /**
      * @return Collection<int, DatoDePago>
      */
     public function getDatoDePago(): Collection
@@ -324,6 +296,36 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
                 $notificacionStock->setUsuario(null);
             }
         }
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Interaccion>
+     */
+    public function getInteracciones(): Collection
+    {
+        return $this->interacciones;
+    }
+
+    public function addInteraccion(Interaccion $interaccion): self
+    {
+        if (!$this->interacciones->contains($interaccion)) {
+            $this->interacciones->add($interaccion);
+            $interaccion->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInteraccion(Interaccion $interaccion): self
+    {
+        if ($this->interacciones->removeElement($interaccion)) {
+            // set the owning side to null (unless already changed)
+            if ($interaccion->getUsuario() === $this) {
+                $interaccion->setUsuario(null);
+            }
+        }
+
         return $this;
     }
 }

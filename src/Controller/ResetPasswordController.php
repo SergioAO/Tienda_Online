@@ -46,7 +46,6 @@ class ResetPasswordController extends AbstractController
                 'label' => 'Correo electrónico',
                 'label_attr' => ['class' => 'form-label']
             ])
-            ->add('Enviar', SubmitType::class, ['attr' => ['class' => 'btn btn-primary mt-3']])
             ->getForm();
 
         $form->handleRequest($request);
@@ -197,7 +196,6 @@ class ResetPasswordController extends AbstractController
 
         $mailer->send($email);
 
-        // Store the token object in session for retrieval in check-email route.
         $this->setTokenObjectInSession($resetToken);
 
         return $this->redirectToRoute('app_check_email');

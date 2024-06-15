@@ -1,6 +1,0 @@
-<!-- templates/preguntas.html.twig -->
-{% if is_granted('ROLE_USER') %}
-    <!-- Formulario de preguntas -->
-{% else %}
-    <p><a href="{{ path('login') }}">Inicia sesión</a> para preguntar.</p>
-{% endif %}
